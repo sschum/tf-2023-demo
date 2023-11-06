@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TechFriday 2023</title>
+    <link data-n-head="1" rel="manifest" href="/tf-2023-demo/manifest.json">
+
+    <!-- vuetify -->
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@3.3.23/dist/vuetify.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+</head>
+<body>
+
+    <div id="vue-app">
+        <v-app>
+            <v-content>
+                <v-container>
+                    <v-row>
+                        <v-col>
+                            <v-card>
+                                <v-card-title>Hello from PWA</v-card-title>
+                                <v-card-text>
+                                    <img src="/tf-2023-demo/icons/cute.png" class="img-fluid" alt="Responsive image">
+                                </v-card-text>
+                            </v-card>
+                        </v-col>
+                    </v-row>
+
+                    <v-row>
+                        <v-col cols="12" sm="6">
+                            <v-text-field v-model="meter" label="Meter" />
+                        </v-col>
+                        <v-col cols="12" sm="6">
+                            <v-text-field v-model="zoll" label="Zoll" />
+                        </v-col>
+                    </v-row>
+                </v-container>
+            </v-content>
+        </v-app>
+    </div>
+
+    <script>
+        if('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/tf-2023-demo/serviceWorker.js')
+        }
+    </script>
+
+    <!-- vue & vuetify -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@3.3.23/dist/vuetify.min.js"></script>
+    <script>
+        const app = Vue.createApp({
+            data(){
+                return {
+                    meter: 0
+                }
+            },
+            computed: {
+                zoll(){
+                    return this.meter * 39.37;
+                }
+            }
+        })
+
+        app.use(Vuetify.createVuetify()).mount('#vue-app')
+    </script>
+</body>
+</html>
